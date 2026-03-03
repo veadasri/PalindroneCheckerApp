@@ -1,21 +1,23 @@
 public class PalindroneCheckerApp {
     public static void main(String[] args){
-        String input = "level";
+        String input = "refer";
 
-        java.util.Queue<Character> queue = new java.util.LinkedList<>();
-        java.util.Stack<Character> stack = new java.util.Stack<>();
+        java.util.Deque<Character> deque = new java.util.ArrayDeque<>();
 
-        // 1. Enqueue characters & Push to stack
+        // 1. Insert characters into deque
         for (char c : input.toCharArray()) {
-            queue.add(c);     // FIFO
-            stack.push(c);    // LIFO
+            deque.addLast(c);
         }
 
         boolean isPalindrome = true;
 
-        // 2. Compare dequeue (queue) vs pop (stack)
-        while (!queue.isEmpty()) {
-            if (!queue.remove().equals(stack.pop())) {
+        // 2 & 3. Remove first & last, compare until empty (or one left)
+        while (deque.size() > 1) {
+
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
