@@ -1,25 +1,36 @@
 public class PalindroneCheckerApp {
     public static void main(String[] args){
-        String input = "A man a plan a canal Panama";
+        String input = "racecar";
 
-        // 1. Normalize string (remove spaces & convert to lowercase)
-        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+        PalindromeChecker checker = new PalindromeChecker();
 
-        // 2. Apply previous two-pointer logic
-        boolean isPalindrome = true;
+        boolean isPalindrome = checker.checkPalindrome(input);
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+    }
+}
+
+// Encapsulated Service Class
+class PalindromeChecker {
+
+    // Public method exposed to users
+    public boolean checkPalindrome(String input) {
+
+        if (input == null)
+            return false;
+
         int start = 0;
-        int end = normalized.length() - 1;
+        int end = input.length() - 1;
 
         while (start < end) {
-            if (normalized.charAt(start) != normalized.charAt(end)) {
-                isPalindrome = false;
-                break;
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
             }
             start++;
             end--;
         }
 
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        return true;
     }
 }
